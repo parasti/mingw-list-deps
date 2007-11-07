@@ -1,0 +1,5 @@
+#!/bin/sh
+
+source ~/dev/mingw/environment.sh
+make "$@"
+

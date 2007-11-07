@@ -1,0 +1,140 @@
+
+-------------------------------------------------------------------------------
+
+zlib DLL
+http://www.zlib.net/
+
+    mkdir zlib123-dll
+    unzip zlib123-dll.zip -d zlib123-dll
+    cd zlib123-dll && sh ../install-zlib.sh
+
+-------------------------------------------------------------------------------
+
+libiconv
+http://www.gnu.org/software/libiconv/
+
+    # There is a circular dependency  between gettext and libiconv. As
+    # suggested  by the  libiconv documentation,  we'll have  to build
+    # libiconv, then build gettext and then rebuild libiconv.
+
+    # First time
+    cross-configure --disable-nls
+    cross-make && cross-make install
+
+    # Second time
+    cross-make distclean
+    cross-configure && cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+gettext
+http://www.gnu.org/software/gettext/
+
+    # gettext 0.16.1 fails to build with MinGW due to some conflicting
+    # macro definitions.  This is fixed in  CVS, but in the  mean time
+    # we'll have to apply a patch to gettext-runtime/intl/localename.c
+    # that can be downloaded from here:
+    #
+    #   http://cvs.savannah.gnu.org/viewvc/gettext/gettext-runtime/\
+    #   intl/localename.c?root=gettext&r1=1.15&r2=1.16&view=patch
+
+    # Only build DLLs, no tools nor documentation.
+    cd gettext-runtime 
+
+    cross-configure --disable-java
+    cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+DirectX development headers
+http://www.libsdl.org/extras/win32/common/
+
+    # These  are  not  strictly  necessary. However,  making  SDL  use
+    # DirectSound significantly  reduces audio latency which  seems to
+    # be unreasonably high with WaveOut.
+    tar -xzf directx-devel.tar.gz -C ~/mingw
+
+-------------------------------------------------------------------------------
+
+SDL
+http://www.libsdl.org/
+
+     cross-configure && cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+libpng
+http://www.libpng.org/pub/png/libpng.html
+
+    cross-configure && cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+libjpeg
+http://www.ijg.org/
+
+    # Note that it's "make install-lib", not "make install"
+    cross-configure && cross-make && cross-make install-lib
+
+-------------------------------------------------------------------------------
+
+SDL_image
+http://www.libsdl.org/projects/SDL_image/
+
+    cross-configure \
+        --disable-jpg-shared \
+        --disable-png-shared \
+        --disable-tif
+    cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+libogg
+http://xiph.org/downloads/
+
+    cross-configure && cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+libvorbis
+http://xiph.org/downloads/
+
+    # There  is a  bug in  libvorbis 1.2.0  with library  dependencies
+    # where libogg  isn't properly linked. Apply  changes suggested in
+    # https://trac.xiph.org/ticket/884,  comment  out the  ./configure
+    # bit  in autogen.sh  and then  run autogen.sh  to regenerate  all
+    # necessary files.
+    cross-configure && cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+SDL_mixer
+http://www.libsdl.org/projects/SDL_mixer/
+
+    # Disabled MP3 support because the  configure script was trying to
+    # use the  build system's SMPEG. Disabled  everything else because
+    # Neverball doesn't need it.
+    cross-configure \
+        --disable-music-ogg-shared \
+        --disable-music-midi \
+        --disable-music-timidity-midi \
+        --disable-music-mod \
+        --disable-music-mp3 
+    cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+FreeType
+http://www.freetype.org/
+
+    cross-configure && cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+SDL_ttf
+http://www.libsdl.org/projects/SDL_ttf/
+
+    cross-configure && cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
