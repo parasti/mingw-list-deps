@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ~/dev/mingw/environment.sh
+source mingw-environment.sh
 
 ./configure \
     --prefix="$MINGW_PREFIX" \
@@ -8,3 +8,4 @@ source ~/dev/mingw/environment.sh
     --host="$HOST"           \
     --without-x              \
     "$@"
+
