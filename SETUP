@@ -31,9 +31,9 @@ gettext
 http://www.gnu.org/software/gettext/
 
     # gettext 0.16.1 fails to build with MinGW due to some conflicting
-    # macro definitions.  This is fixed in  CVS, but in the  mean time
-    # we'll have to apply a patch to gettext-runtime/intl/localename.c
-    # that can be downloaded from here:
+    # macro definitions. This is fixed  in 0.17, but for 0.16.1 you'll
+    # have to apply a  patch to gettext-runtime/intl/localename.c that
+    # can be downloaded from here:
     #
     #   http://cvs.savannah.gnu.org/viewvc/gettext/gettext-runtime/\
     #   intl/localename.c?root=gettext&r1=1.15&r2=1.16&view=patch
