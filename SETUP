@@ -71,10 +71,15 @@ http://www.libpng.org/pub/png/libpng.html
 -------------------------------------------------------------------------------
 
 libjpeg
-http://www.ijg.org/
+http://sourceforge.net/projects/libjpeg/
 
-    # Note that it's "make install-lib", not "make install"
-    cross-configure && cross-make && cross-make install-lib
+    # Get libjpeg from Sourceforge CVS.
+
+    # Remake config files, if necessary.
+    install -d m4
+    sh autogen.sh
+
+    cross-configure && cross-make && cross-make install
 
 -------------------------------------------------------------------------------
 
