@@ -71,15 +71,17 @@ http://www.libpng.org/pub/png/libpng.html
 -------------------------------------------------------------------------------
 
 libjpeg
-http://sourceforge.net/projects/libjpeg/
+http://gnuwin32.sourceforge.net/packages/jpeg.htm
 
-    # Get libjpeg from Sourceforge CVS.
+    # The headers  from upstream have  conflicts with some  of MinGW's
+    # own  headers. After  a couple  of unsuccessful  attempts I  have
+    # given up on trying to build libjpeg manually and have decided to
+    # use a version from the GnuWin32 project.
 
-    # Remake config files, if necessary.
-    install -d m4
-    sh autogen.sh
+    # Get the "Binaries" (bin) and "Developer files" (lib) ZIP archives.
 
-    cross-configure && cross-make && cross-make install
+    unzip "$binarchive" bin/jpeg62.dll -d "$MINGW_PREFIX"
+    unzip "$libarchive" 'include/*.h' lib/libjpeg.dll.a -d "$MINGW_PREFIX"
 
 -------------------------------------------------------------------------------
 
