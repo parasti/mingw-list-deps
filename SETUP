@@ -85,17 +85,6 @@ http://gnuwin32.sourceforge.net/packages/jpeg.htm
 
 -------------------------------------------------------------------------------
 
-SDL_image
-http://www.libsdl.org/projects/SDL_image/
-
-    cross-configure \
-        --disable-jpg-shared \
-        --disable-png-shared \
-        --disable-tif
-    cross-make && cross-make install
-
--------------------------------------------------------------------------------
-
 libogg
 http://xiph.org/downloads/
 
@@ -112,22 +101,6 @@ http://xiph.org/downloads/
     # bit  in autogen.sh  and then  run autogen.sh  to regenerate  all
     # necessary files.
     cross-configure && cross-make && cross-make install
-
--------------------------------------------------------------------------------
-
-SDL_mixer
-http://www.libsdl.org/projects/SDL_mixer/
-
-    # Disabled MP3 support because the  configure script was trying to
-    # use the  build system's SMPEG. Disabled  everything else because
-    # Neverball doesn't need it.
-    cross-configure \
-        --disable-music-ogg-shared \
-        --disable-music-midi \
-        --disable-music-timidity-midi \
-        --disable-music-mod \
-        --disable-music-mp3 
-    cross-make && cross-make install
 
 -------------------------------------------------------------------------------
 
