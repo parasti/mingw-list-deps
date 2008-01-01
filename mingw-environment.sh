@@ -1,6 +1,6 @@
 # This file is in the public domain for what it's worth.
 # Written by Jānis Rūcis <parasti@gmail.com>
-# Last updated in September, 2007.
+# Last updated in January, 2008.
 
 # README:
 #
@@ -69,16 +69,16 @@ export CC_FOR_BUILD
 OBJDUMP=$TARGET-objdump
 export OBJDUMP
 
-# Exclusively for libjpeg.
+# Incomplete list of binary utilies.  Expand as needed.
+
 RANLIB=$TARGET-ranlib
 export RANLIB
 
-# Exclusively for SDL_mixer 1.2.5.
 NM=$TARGET-nm
 export NM
 
 # CFLAGS and CPPFLAGS aren't always  the best place for setting these.
-# Instead, we inform GCC directly                                    .
+# Instead, we inform GCC directly.
 
 CPATH="$MINGW_PREFIX/include:$CPATH"
 export CPATH
