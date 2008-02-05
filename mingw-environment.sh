@@ -26,6 +26,9 @@
 MINGW_PREFIX=~/dev/mingw
 export MINGW_PREFIX
 
+WINE=/usr/lib/wine/wine.bin
+export WINE
+
 # Some  rationale for  why  some of  the variables  below  have to  be
 # specified: it  appears that configure scripts  use different methods
 # to determine  whether cross-compilation is  in effect. Some  rely on
