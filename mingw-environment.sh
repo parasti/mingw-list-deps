@@ -1,6 +1,6 @@
 # This file is in the public domain for what it's worth.
 # Written by Jānis Rūcis <parasti@gmail.com>
-# Last updated in January, 2008.
+# Last updated in February, 2008.
 
 # README:
 #
@@ -26,7 +26,7 @@
 MINGW_PREFIX=~/dev/mingw
 export MINGW_PREFIX
 
-WINE=/usr/lib/wine/wine.bin
+WINE=~/dev/wine/repo/wine
 export WINE
 
 # Some  rationale for  why  some of  the variables  below  have to  be
@@ -69,10 +69,10 @@ export CC_FOR_BUILD
 # (sometimes)  a sufficient  work-around. (Note  that this  might have
 # been fixed to some extent in recent libtool versions.)
 
+# This is an incomplete list of binary utilies.  Expand as needed.
+
 OBJDUMP=$TARGET-objdump
 export OBJDUMP
-
-# Incomplete list of binary utilies.  Expand as needed.
 
 RANLIB=$TARGET-ranlib
 export RANLIB
