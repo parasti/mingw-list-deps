@@ -26,7 +26,7 @@
 MINGW_PREFIX=~/dev/mingw
 export MINGW_PREFIX
 
-WINE=~/dev/wine/repo/wine
+WINE=/usr/lib/wine/wine.bin
 export WINE
 
 # Some  rationale for  why  some of  the variables  below  have to  be
