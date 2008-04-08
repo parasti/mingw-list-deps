@@ -1,6 +1,6 @@
 # This file is in the public domain for what it's worth.
 # Written by Jānis Rūcis <parasti@gmail.com>
-# Last updated in February, 2008.
+# Last updated in April, 2008.
 
 # README:
 #
@@ -26,6 +26,10 @@
 MINGW_PREFIX=~/dev/mingw
 export MINGW_PREFIX
 
+# This isn't plain 'wine' because in Debian the Wine in PATH is actually the
+# Winelauncher script, which is a bit too slow and too helpful for our tastes.
+
+# Useful for builds that use their own functionality half-way through.
 WINE=/usr/lib/wine/wine.bin
 export WINE
 
