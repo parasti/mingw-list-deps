@@ -13,8 +13,8 @@ http://www.zlib.net/
 libiconv
 http://www.gnu.org/software/libiconv/
 
-    # There is a circular dependency  between gettext and libiconv. As
-    # suggested  by the  libiconv documentation,  we'll have  to build
+    # There is a circular dependency between gettext and libiconv.  As
+    # suggested by the libiconv documentation, we'll have to build
     # libiconv, then build gettext and then rebuild libiconv.
 
     # First time
@@ -31,12 +31,10 @@ gettext
 http://www.gnu.org/software/gettext/
 
     # gettext 0.16.1 fails to build with MinGW due to some conflicting
-    # macro definitions. This is fixed  in 0.17, but for 0.16.1 you'll
-    # have to apply a  patch to gettext-runtime/intl/localename.c that
-    # can be downloaded from here:
+    # macro definitions.  This is fixed in 0.17, but for 0.16.1 you'll
+    # have to apply a patch to gettext-runtime/intl/localename.c[*].
     #
-    #   http://cvs.savannah.gnu.org/viewvc/gettext/gettext-runtime/\
-    #   intl/localename.c?root=gettext&r1=1.15&r2=1.16&view=patch
+    # [*] http://cvs.savannah.gnu.org/viewvc/gettext/gettext-runtime/intl/localename.c?root=gettext&r1=1.15&r2=1.16&view=patch
 
     # Only build DLLs, no tools nor documentation.
     cd gettext-runtime 
@@ -49,10 +47,10 @@ http://www.gnu.org/software/gettext/
 DirectX development headers
 http://www.libsdl.org/extras/win32/common/
 
-    # These  are  not  strictly  necessary. However,  making  SDL  use
-    # DirectSound significantly  reduces audio latency which  seems to
-    # be unreasonably high with WaveOut.
-    tar -xzf directx-devel.tar.gz -C ~/mingw
+    # These are not strictly necessary, however, making SDL use
+    # DirectSound significantly reduces audio latency which is
+    # unreasonably high with the WaveOut default.
+    tar -xzf directx-devel.tar.gz -C "$MINGW_PREFIX"
 
 -------------------------------------------------------------------------------
 
@@ -73,12 +71,13 @@ http://www.libpng.org/pub/png/libpng.html
 libjpeg
 http://gnuwin32.sourceforge.net/packages/jpeg.htm
 
-    # The headers  from upstream have  conflicts with some  of MinGW's
-    # own  headers. After  a couple  of unsuccessful  attempts I  have
+    # The headers from upstream have conflicts with some of MinGW's
+    # own headers.  After a couple of unsuccessful attempts I have
     # given up on trying to build libjpeg manually and have decided to
     # use a version from the GnuWin32 project.
 
-    # Get the "Binaries" (bin) and "Developer files" (lib) ZIP archives.
+    # Get the "Binaries" (bin) and "Developer files" (lib) ZIP
+    # archives.
 
     unzip "$binarchive" bin/jpeg62.dll -d "$MINGW_PREFIX"
     unzip "$libarchive" 'include/*.h' lib/libjpeg.dll.a -d "$MINGW_PREFIX"
@@ -95,11 +94,12 @@ http://xiph.org/downloads/
 libvorbis
 http://xiph.org/downloads/
 
-    # There     is    a     bug     in     libvorbis    1.2.0     with
-    # library    dependencies.    Apply     changes    suggested    in
-    # https://trac.xiph.org/ticket/884#comment:3,   comment  out   the
-    # ./configure  bit  in  autogen.sh  and  then  run  autogen.sh  to
+    # There is a bug in libvorbis 1.2.0 with library dependencies.
+    # Apply changes suggested in the respective bug report[*], comment
+    # out the ./configure bit in autogen.sh and then run autogen.sh to
     # regenerate all necessary files.
+    #
+    # [*] https://trac.xiph.org/ticket/884#comment:3
 
     cross-configure && cross-make && cross-make install
 
