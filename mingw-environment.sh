@@ -1,6 +1,6 @@
 # This file is in the public domain for what it's worth.
 # Written by Jānis Rūcis <parasti@gmail.com>
-# Last updated in April, 2008.
+# Last updated in September, 2008.
 
 # README:
 #
@@ -57,6 +57,9 @@ HOST=$TARGET
 
 CC=$TARGET-gcc
 export CC
+
+CXX=$TARGET-g++
+export CXX
 
 # Appears to be used by libtool, although I haven't (yet) run into any
 # trouble without it.
