@@ -1,0 +1,27 @@
+#!/bin/sh
+
+source mingw-environment.sh
+
+DLLS="$(find "$MINGW_PREFIX/bin" "$MINGW_PREFIX/lib" -name "*.dll")"
+
+case "$1" in
+-h|--help)
+    echo "Usage: $0 [--sh]"
+    exit
+    ;;
+--sh)
+    cat <<EOF
+#!/bin/sh
+# This script was generated automatically.
+# Edit the list below to suit your needs.
+
+cp \\
+$(echo "$DLLS" | sed -e 's/^/    /' -e 's/$/ \\/')
+    .
+EOF
+    ;;
+*)
+    echo "$DLLS"
+    ;;
+esac
+
