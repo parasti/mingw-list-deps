@@ -1,0 +1,17 @@
+#!/bin/sh
+
+source mingw-environment.sh
+
+cat >&2 <<EOF
+WARNING:  Certain DLLs may stop working after stripped.  Make sure to
+          only strip DLLs compiled using the $TARGET compiler.
+EOF
+
+test "$1" || {
+    echo "Usage: $0 DLLS"
+    exit
+}
+
+set -x
+$TARGET-strip --strip-unneeded "$@"
+
