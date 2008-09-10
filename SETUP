@@ -61,6 +61,26 @@ http://www.libsdl.org/
 
 -------------------------------------------------------------------------------
 
+SDL_mixer
+http://www.libsdl.org/projects/SDL_mixer/
+
+    cross-configure --disable-music-mp3 --disable-music-ogg-shared
+    cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
+SDL_image
+http://www.libsdl.org/projects/SDL_image/
+
+    cross-configure \
+        --disable-jpg-shared \
+        --disable-png-shared \
+        --disable-tif
+
+    cross-make && cross-make install
+
+-------------------------------------------------------------------------------
+
 libpng
 http://www.libpng.org/pub/png/libpng.html
 
