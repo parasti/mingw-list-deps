@@ -23,6 +23,8 @@
 #   when cross-compiling, a build system still has support the LDFLAGS
 #   environment variable.
 
+# If 'make install' is used to install this script, the MINGW_PREFIX
+# setting below is overwritten with the one from the Makefile.
 MINGW_PREFIX=~/dev/mingw
 export MINGW_PREFIX
 
