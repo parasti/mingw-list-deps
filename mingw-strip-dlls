@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source mingw-environment.sh
+. mingw-environment.sh
 
 cat >&2 <<EOF
 WARNING:  Certain DLLs may stop working after stripped.  Make sure to

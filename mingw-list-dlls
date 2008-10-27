@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source mingw-environment.sh
+. mingw-environment.sh
 
 DLLS="$(find "$MINGW_PREFIX/bin" "$MINGW_PREFIX/lib" -name "*.dll")"
 
