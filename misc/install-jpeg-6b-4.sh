@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source mingw-environment.sh
+. mingw-environment.sh
 
 set -x
 

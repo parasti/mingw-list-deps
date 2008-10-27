@@ -6,7 +6,7 @@
 # line with MinGW's naming conventions and does not require build
 # scripts to be modified to link "-lzdll" instead of "-lz".
 
-source mingw-environment.sh
+. mingw-environment.sh
 
 set -x
 
