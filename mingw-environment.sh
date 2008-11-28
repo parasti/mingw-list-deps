@@ -91,6 +91,9 @@ export RANLIB
 NM=$TARGET-nm
 export NM
 
+WINDRES=$TARGET-windres
+export WINDRES
+
 # CFLAGS and CPPFLAGS aren't always the best place for setting these.
 # Instead, we inform GCC directly.
 
