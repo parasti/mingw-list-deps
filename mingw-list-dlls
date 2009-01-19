@@ -95,12 +95,7 @@ graph)
 esac
 
 while test $# != 0; do
-    if test -f "$1"; then
-	list_deps "$1" $initindent $longnames
-    else
-	echo "Skipping non-existent file '$1'" >&2
-    fi
-
+    list_deps "$1" $initindent $longnames
     shift
 done | {
     case "$format" in
