@@ -1,13 +1,16 @@
 #!/bin/sh
 
-binary=
 format=raw
 verbose=
 
 usage() {
-    echo "Usage: $0 [--verbose] [--format={raw|shell|graph}] binary.exe" >&2
+    cat >&2 <<EOF
+Usage: $0 [--verbose] [--format={raw|shell|graph}] [--] {file.dll|file.exe} ...
+EOF
     exit 1
 }
+
+test $# != 0 || usage
 
 while test $# != 0; do
     case "$1" in
@@ -19,19 +22,20 @@ while test $# != 0; do
 	*) usage ;;
 	esac
 	;;
-
     --verbose)
 	verbose=1
 	;;
-
+    --)
+	shift
+	break
+	;;
     *)
-	test "$binary" && usage || binary="$1"
+	break
 	;;
     esac
+
     shift
 done
-
-test -f "$binary" || usage
 
 . mingw-environment.sh
 
@@ -90,7 +94,15 @@ graph)
     longnames=0
 esac
 
-list_deps "$binary" $initindent $longnames | {
+while test $# != 0; do
+    if test -f "$1"; then
+	list_deps "$1" $initindent $longnames
+    else
+	echo "Skipping non-existent file '$1'" >&2
+    fi
+
+    shift
+done | {
     case "$format" in
     raw)
 	sed 's/^\s\+//' | sort | uniq
