@@ -94,6 +94,9 @@ export NM
 WINDRES=$TARGET-windres
 export WINDRES
 
+STRIP=$TARGET-strip
+export STRIP
+
 # CFLAGS and CPPFLAGS aren't always the best place for setting these.
 # Instead, we inform GCC directly.
 
