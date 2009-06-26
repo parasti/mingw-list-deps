@@ -143,3 +143,15 @@ http://www.libsdl.org/projects/SDL_ttf/
 
 -------------------------------------------------------------------------------
 
+PhysicsFS
+http://icculus.org/physfs/
+
+    # PhysicsFS 2.0 uses a Cmake-based build system, with almost no
+    # support for cross-compilation.  1.0 uses Autotools,
+    # cross-compiles easily and is much more widely available (e.g.,
+    # Debian Lenny only has 1.0).
+
+    mingw-configure --disable-internal-zlib && mingw-make && mingw-make install
+
+-------------------------------------------------------------------------------
+
