@@ -42,8 +42,7 @@ install:
 	    -e 's,^WINE=.*$$,WINE=$(WINE),' \
 	    -e 's,^BUILD=.*$$,BUILD=$(BUILD),' \
 	    -e 's,^TARGET=.*$$,TARGET=$(TARGET),' \
-	    < $(ENV_SCRIPT) > $(ENV_SCRIPT).mod
-	mv -f $(ENV_SCRIPT).mod $(ENV_SCRIPT)
+	    < $(ENV_SCRIPT).in > $(ENV_SCRIPT)
 
 	install -d $(BINDIR)
 	install $(SCRIPTS) $(BINDIR)
