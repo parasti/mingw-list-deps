@@ -7,7 +7,7 @@ http://www.zlib.net/
     mkdir zlib123-dll
     unzip zlib123-dll.zip -d zlib123-dll
     cd zlib123-dll
-    sh install-zlib-1.2.3.sh
+    sh install-zlib-dll.sh
 
 -------------------------------------------------------------------------------
 
