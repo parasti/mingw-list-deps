@@ -31,12 +31,6 @@ http://www.gnu.org/software/libiconv/
 gettext
 http://www.gnu.org/software/gettext/
 
-    # gettext 0.16.1 fails to build with MinGW due to some conflicting
-    # macro definitions.  This is fixed in 0.17, but for 0.16.1 you'll
-    # have to apply a patch to gettext-runtime/intl/localename.c[*].
-    #
-    # [*] http://cvs.savannah.gnu.org/viewvc/gettext/gettext-runtime/intl/localename.c?root=gettext&r1=1.15&r2=1.16&view=patch
-
     # Only build DLLs, no tools nor documentation.
     cd gettext-runtime 
 
@@ -62,26 +56,6 @@ http://www.libsdl.org/
 
 -------------------------------------------------------------------------------
 
-SDL_mixer
-http://www.libsdl.org/projects/SDL_mixer/
-
-    mingw-configure --disable-music-mp3 --disable-music-ogg-shared
-    mingw-make && mingw-make install
-
--------------------------------------------------------------------------------
-
-SDL_image
-http://www.libsdl.org/projects/SDL_image/
-
-    mingw-configure \
-        --disable-jpg-shared \
-        --disable-png-shared \
-        --disable-tif
-
-    mingw-make && mingw-make install
-
--------------------------------------------------------------------------------
-
 libpng
 http://www.libpng.org/pub/png/libpng.html
 
@@ -90,49 +64,30 @@ http://www.libpng.org/pub/png/libpng.html
 -------------------------------------------------------------------------------
 
 libjpeg
-http://gnuwin32.sourceforge.net/packages/jpeg.htm
+http://www.ijg.org/
 
-    # The headers from upstream have conflicts with some of MinGW's
-    # own headers.  After a couple of unsuccessful attempts I have
-    # given up on trying to build libjpeg manually and have decided to
-    # use a version from the GnuWin32 project.
-
-    # Get the "Binaries" (bin) and "Developer files" (lib) ZIP
-    # archives.
-
-    unzip "$binarchive" bin/jpeg62.dll -d "$MINGW_PREFIX"
-    unzip "$libarchive" 'include/*.h' lib/libjpeg.dll.a -d "$MINGW_PREFIX"
+    mingw-configure && mingw-make && mingw-make install-strip
 
 -------------------------------------------------------------------------------
 
 libogg
 http://xiph.org/downloads/
 
-    mingw-configure && mingw-make && mingw-make install
+    mingw-configure && mingw-make && mingw-make install-strip
 
 -------------------------------------------------------------------------------
 
 libvorbis
 http://xiph.org/downloads/
 
-    # There is a bug in libvorbis 1.2.0 (currently fixed in
-    # development code) with library dependencies.  Apply changes
-    # suggested in the respective bug report[*], comment out the
-    # ./configure bit in autogen.sh and then run autogen.sh to
-    # regenerate all necessary files.
-    #
-    # [*] https://trac.xiph.org/ticket/884#comment:3
-
-    mingw-configure && mingw-make && mingw-make install
+    mingw-configure && mingw-make && mingw-make install-strip
 
 -------------------------------------------------------------------------------
 
 FreeType
 http://www.freetype.org/
 
-    # Same problem as libvorbis;  fixed in FreeType > v2.3.5.
-
-    mingw-configure && mingw-make && mingw-make install
+    mingw-configure && mingw-make && mingw-make install-strip
 
 -------------------------------------------------------------------------------
 
@@ -146,12 +101,15 @@ http://www.libsdl.org/projects/SDL_ttf/
 PhysicsFS
 http://icculus.org/physfs/
 
-    # PhysicsFS 2.0 uses a Cmake-based build system, with almost no
-    # support for cross-compilation.  1.0 uses Autotools,
-    # cross-compiles easily and is much more widely available (e.g.,
-    # Debian Lenny only has 1.0).
-
-    mingw-configure --disable-internal-zlib && mingw-make && mingw-make install
+    mkdir build && cd build
+    mingw-cmake .. && mingw-make && mingw-make install
 
 -------------------------------------------------------------------------------
 
+OpenGL headers
+http://opengl.org/registry/
+
+    mkdir -p $MINGW_PREFIX/include/GL
+    cp glext.h $MINGW_PREFIX/include/GL/
+
+-------------------------------------------------------------------------------
