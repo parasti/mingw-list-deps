@@ -29,6 +29,7 @@ ENV_SCRIPT := mingw-environment.sh
 SCRIPTS := \
 	$(ENV_SCRIPT)    \
 	mingw-make       \
+	mingw-cmake      \
 	mingw-configure  \
 	mingw-list-dlls  \
 	mingw-strip-dlls
