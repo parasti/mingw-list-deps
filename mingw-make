@@ -1,5 +1,0 @@
-#!/bin/sh
-
-. mingw-environment.sh
-make "$@"
-
