@@ -8,5 +8,7 @@ List and copy the linked DLLs of a Windows .exe/.dll in a MinGW environment.
 
 ## Usage
 
-`mingw-list-deps file.exe|file.dll ...`
-`mingw-list-deps --copy file.exe|file.dll ...`
+```
+mingw-list-deps file.exe|file.dll ...
+mingw-list-deps --copy file.exe|file.dll ...
+```
