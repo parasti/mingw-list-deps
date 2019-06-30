@@ -5,6 +5,27 @@
     exit 1
 }
 
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -h|--help)
+            echo "Usage: $0 file.exe|file.dll ..."
+            exit
+            ;;
+        --copy)
+            COPY=1
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            break
+            ;;
+    esac
+
+    shift
+done
+
 # Find an objdump binary.
 OBJDUMP=${OBJDUMP:-objdump}
 
@@ -39,7 +60,7 @@ list_deps() {
                 LISTED_DLLS="$(echo "$LISTED_DLLS" && echo "$installed")"
                 list_deps "$installed"
             else
-                echo "$(basename "$installed") is a circular dependency, skipping" >&2
+                echo "$(basename "$installed") is already listed, skipping" >&2
             fi
         elif [ "$VERBOSE" = 1 ]; then
             echo "$dll required by $(basename "$1"), but not found" >&2
@@ -48,5 +69,11 @@ list_deps() {
 }
 
 for obj in "$@"; do
-    list_deps "$obj"
+    DEPS="$(list_deps "$obj")"
+
+    if [ "$DEPS" ]; then
+        echo "$DEPS"
+
+        [ "$COPY" = 1 ] && cp $DEPS "$(dirname "$obj")"
+    fi
 done
