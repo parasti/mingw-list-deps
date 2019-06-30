@@ -26,14 +26,21 @@ dump_dlls() {
     $OBJDUMP -p -- "$1" | grep 'DLL Name: ' | cut -d: -f2
 }
 
+LISTED_DLLS=""
+
 # Recursively dump the linked DLLs.
 list_deps() {
     for dll in $(dump_dlls "$1"); do
         installed="$(echo "$ALL_DLLS" | grep "$dll" | head -n1)"
 
         if [ "$installed" ]; then
-            echo "$installed"
-            list_deps "$installed"
+            if [ ! "$(echo "$LISTED_DLLS" | grep "$installed")" ]; then
+                echo "$installed"
+                LISTED_DLLS="$(echo "$LISTED_DLLS" && echo "$installed")"
+                list_deps "$installed"
+            else
+                echo "$(basename "$installed") is a circular dependency, skipping" >&2
+            fi
         elif [ "$VERBOSE" = 1 ]; then
             echo "$dll required by $(basename "$1"), but not found" >&2
         fi
@@ -42,4 +49,4 @@ list_deps() {
 
 for obj in "$@"; do
     list_deps "$obj"
-done | LC_ALL=C sort | uniq
+done
