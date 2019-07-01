@@ -37,20 +37,29 @@ $OBJDUMP --version &> /dev/null || {
 }
 
 # List of wildcards of all installed DLLs.
-DLL_GLOBS="/usr/i686-w64-mingw32/sys-root/mingw/bin/*.dll /mingw64/bin/*.dll"
+DLL_GLOBS_32="/usr/i686-w64-mingw32/sys-root/mingw/bin/*.dll /mingw32/bin/*.dll"
+DLL_GLOBS_64="/usr/x86_64-w64-mingw32/sys-root/mingw/bin/*.dll /mingw64/bin/*.dll"
 
 # All installed DLLs as a newline-separated list.
-ALL_DLLS="$(for dll in $DLL_GLOBS; do [ -f "$dll" ] && echo $dll; done)"
+ALL_DLLS_32="$(for dll in $DLL_GLOBS_32; do [ -f "$dll" ] && echo $dll; done)"
+ALL_DLLS_64="$(for dll in $DLL_GLOBS_64; do [ -f "$dll" ] && echo $dll; done)"
 
 # Dump the linked DLLs.
 dump_dlls() {
     $OBJDUMP -p -- "$1" | grep 'DLL Name: ' | cut -d: -f2
 }
 
+is_64bit() {
+    [ "$($OBJDUMP -f -- "$1" | grep 'architecture: i386:x86-64')" ]
+}
+
+# Track seen DLLs to avoid infinite recursion on circular deps.
 LISTED_DLLS=""
 
 # Recursively dump the linked DLLs.
 list_deps() {
+    is_64bit "$1" && ALL_DLLS="$ALL_DLLS_64" || ALL_DLLS="$ALL_DLLS_32"
+
     for dll in $(dump_dlls "$1"); do
         installed="$(echo "$ALL_DLLS" | grep "$dll" | head -n1)"
 
